@@ -30,25 +30,27 @@ function makeCells() {
     cell.classList.add(gameArray[i]);
     grid.appendChild(cell);
     cells.push(cell);
-    let p = i;
 
-    cell.addEventListener("click", function (evt, p) {
-      clickHandler(cell, p);
+    cell.addEventListener("click", function (evt) {
+      clickHandler(cell, evt.target.id);
     });
   }
 }
 
 function clickHandler(cell, p) {
   let numOfBombs = 0;
-  console.log(p);
+  let cellNum = parseInt(p);
   if (cell.classList.contains("safe")) {
-    if (cell[p - 11].classList.contains("bomb")) {
+    if (cells[cellNum - 11].classList.contains("bomb")) {
       numOfBombs++;
     }
-    console.log(cell[i]);
     cell.textContent = numOfBombs;
   }
   if (cell.classList.contains("bomb")) {
     console.log("You clicked on a bomb! Try again");
   }
+}
+
+function resetGame() {
+  initialize();
 }
