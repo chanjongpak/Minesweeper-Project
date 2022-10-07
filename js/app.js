@@ -14,6 +14,7 @@ function initialize() {
   flagCount = 15;
   makeCells();
   flags.textContent = `Flags Left: ${flagCount}`;
+  button.addEventListener("click", resetGame);
 }
 
 function makeCells() {
@@ -40,14 +41,50 @@ function makeCells() {
 function clickHandler(cell, p) {
   let numOfBombs = 0;
   let cellNum = parseInt(p);
+  let topRow = cellNum < 10;
+  let botRow = cellNum > 89;
+  let leftEdge = cellNum % 10 == 0;
+  let rightEdge = cellNum % 10 == 9;
   if (cell.classList.contains("safe")) {
-    if (cells[cellNum - 11].classList.contains("bomb")) {
+    if (topRow || leftEdge) {
+    } else if (cells[cellNum - 11].classList.contains("bomb")) {
       numOfBombs++;
     }
-    cell.textContent = numOfBombs;
+    if (topRow) {
+    } else if (cells[cellNum - 10].classList.contains("bomb")) {
+      numOfBombs++;
+    }
+    if (topRow || rightEdge) {
+    } else if (cells[cellNum - 9].classList.contains("bomb")) {
+      numOfBombs++;
+    }
+    if (leftEdge) {
+    } else if (cells[cellNum - 1].classList.contains("bomb")) {
+      numOfBombs++;
+    }
+    if (rightEdge) {
+    } else if (cells[cellNum + 1].classList.contains("bomb")) {
+      numOfBombs++;
+    }
+    if (botRow || leftEdge) {
+    } else if (cells[cellNum + 9].classList.contains("bomb")) {
+      numOfBombs++;
+    }
+    if (botRow) {
+    } else if (cells[cellNum + 10].classList.contains("bomb")) {
+      numOfBombs++;
+    }
+    if (botRow || rightEdge) {
+    } else if (cells[cellNum + 11].classList.contains("bomb")) {
+      numOfBombs++;
+    }
+    if (numOfBombs > 0) {
+      cell.textContent = numOfBombs;
+    }
   }
   if (cell.classList.contains("bomb")) {
     console.log("You clicked on a bomb! Try again");
+    gameStatus = false;
   }
 }
 
