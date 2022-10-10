@@ -24,8 +24,8 @@ body {
   font-size: 18px;
 }
 
-.emptyCell {
-  background-color: limegreen;
+.empty {
+  background-color: grey;
 }
 
 .bomb {
