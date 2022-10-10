@@ -10,8 +10,8 @@ initialize();
 
 function initialize() {
   gameStatus = true;
-  startBomb = 15;
-  flagCount = 15;
+  startBomb = 20;
+  flagCount = 20;
   makeCells();
   flags.textContent = `Flags Currently Left: ${flagCount}`;
 }
@@ -107,6 +107,54 @@ function onClick(cell) {
     cell.textContent = totalBombsAround;
     return;
   }
+  recurNeighbour(cell, currentId);
 }
 
+function recurNeighbour(cell, currentId) {
+  let leftEdge = currentId % 10 == 0;
+  let rightEdge = currentId % 10 == 9;
+
+  setTimeout(() => {
+    if (currentId > 9 && !leftEdge) {
+      let newId = cells[parseInt(currentId) - 11].id;
+      let newCell = document.getElementById(newId);
+      onClick(newCell);
+    }
+    if (currentId > 9) {
+      let newId = cells[parseInt(currentId) - 10].id;
+      let newCell = document.getElementById(newId);
+      onClick(newCell);
+    }
+    if (currentId > 9 && !rightEdge) {
+      let newId = cells[parseInt(currentId) - 9].id;
+      let newCell = document.getElementById(newId);
+      onClick(newCell);
+    }
+    if (currentId > 0 && !leftEdge) {
+      let newId = cells[parseInt(currentId) - 1].id;
+      let newCell = document.getElementById(newId);
+      onClick(newCell);
+    }
+    if (currentId >= 0 && !rightEdge) {
+      let newId = cells[parseInt(currentId) + 1].id;
+      let newCell = document.getElementById(newId);
+      onClick(newCell);
+    }
+    if (currentId < 90 && !leftEdge) {
+      let newId = cells[parseInt(currentId) + 9].id;
+      let newCell = document.getElementById(newId);
+      onClick(newCell);
+    }
+    if (currentId < 90) {
+      let newId = cells[parseInt(currentId) + 10].id;
+      let newCell = document.getElementById(newId);
+      onClick(newCell);
+    }
+    if (currentId < 90 && !rightEdge) {
+      let newId = cells[parseInt(currentId) + 11].id;
+      let newCell = document.getElementById(newId);
+      onClick(newCell);
+    }
+  }, 50);
+}
 function addFlag(cell) {}
