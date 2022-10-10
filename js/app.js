@@ -45,9 +45,6 @@ function clickHandler(cell, p) {
   let botRow = cellNum > 89;
   let leftEdge = cellNum % 10 == 0;
   let rightEdge = cellNum % 10 == 9;
-  if (gameStatus == false) {
-    return;
-  }
   if (cell.classList.contains("safe")) {
     if (topRow || leftEdge) {
     } else if (cells[cellNum - 11].classList.contains("bomb")) {
@@ -83,6 +80,9 @@ function clickHandler(cell, p) {
     }
     if (numOfBombs > 0) {
       cell.textContent = numOfBombs;
+    }
+    if (numOfBombs == 0) {
+      cell.classList.add("emptyCell");
     }
   }
   if (cell.classList.contains("bomb")) {
