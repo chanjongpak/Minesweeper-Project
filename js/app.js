@@ -157,4 +157,39 @@ function recurNeighbour(cell, currentId) {
     }
   }, 50);
 }
-function addFlag(cell) {}
+function addFlag(cell) {
+  if (gameStatus == false) {
+    return;
+  }
+  if (!cell.classList.contains("checked")) {
+    if (!cell.classList.contains("flag")) {
+      cell.classList.add("flag");
+      cell.innerHTML = "🚩";
+      flagCount--;
+      flags.textContent = `Flags Remaining: ${flagCount}`;
+      winCondition();
+    } else {
+      cell.classList.remove("flag");
+      cell.innerHTML = "";
+      flagCount++;
+      flags.textContent = `Flags Remaining: ${flagCount}`;
+    }
+  }
+}
+
+function winCondition() {
+  let flaggedBomb = 0;
+
+  for (let i = 0; i < cells.length; i++) {
+    if (
+      cells[i].classList.contains("flag") &&
+      cells[i].classList.contains("bomb")
+    ) {
+      flaggedBomb++;
+    }
+    if (flaggedBomb == startBomb) {
+      flags.textContent = "YOU WIN! PLAY AGAIN?";
+      gameStatus = false;
+    }
+  }
+}
