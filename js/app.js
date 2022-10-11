@@ -9,6 +9,7 @@ let gameStatus;
 initialize();
 
 function initialize() {
+  button.addEventListener("click", resetGame);
   gameStatus = true;
   startBomb = 20;
   flagCount = 20;
@@ -98,6 +99,7 @@ function onClick(cell) {
   if (cell.classList.contains("bomb")) {
     gameStatus = false;
     flags.textContent = "GAME OVER! Try Again?";
+    cell.innerHTML = "💣";
   }
   if (totalBombsAround == 0) {
     cell.classList.add("empty");
@@ -155,8 +157,9 @@ function recurNeighbour(cell, currentId) {
       let newCell = document.getElementById(newId);
       onClick(newCell);
     }
-  }, 50);
+  }, 25);
 }
+
 function addFlag(cell) {
   if (gameStatus == false) {
     return;
@@ -187,14 +190,19 @@ function winCondition() {
   for (let i = 0; i < cells.length; i++) {
     if (
       cells[i].classList.contains("flag") &&
-      cells[i].classList.contains("bomb") &&
-      cells[i].classList.contains("empty")
+      cells[i].classList.contains("bomb")
     ) {
       flaggedBomb++;
     }
-    if (flaggedBomb == startBomb) {
-      flags.textContent = "YOU WIN! PLAY AGAIN?";
-      gameStatus = false;
-    }
   }
+  if (flaggedBomb == startBomb) {
+    flags.textContent = "YOU WIN! PLAY AGAIN?";
+    gameStatus = false;
+  }
+}
+
+button.addEventListener("click", resetGame);
+
+function resetGame() {
+  location.reload();
 }
