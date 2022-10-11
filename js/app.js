@@ -161,7 +161,11 @@ function addFlag(cell) {
   if (gameStatus == false) {
     return;
   }
-  if (!cell.classList.contains("checked")) {
+  if (
+    !cell.classList.contains("checked") &&
+    !cell.classList.contains("empty") &&
+    flagCount > 0
+  ) {
     if (!cell.classList.contains("flag")) {
       cell.classList.add("flag");
       cell.innerHTML = "🚩";
@@ -183,7 +187,8 @@ function winCondition() {
   for (let i = 0; i < cells.length; i++) {
     if (
       cells[i].classList.contains("flag") &&
-      cells[i].classList.contains("bomb")
+      cells[i].classList.contains("bomb") &&
+      cells[i].classList.contains("empty")
     ) {
       flaggedBomb++;
     }
