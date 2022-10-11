@@ -8,6 +8,14 @@
 
 Minesweeper is a single-player strategic puzzle game played usually on a square board. My version is played on a 10x10 grid. The objective of the game is to locate and flag the randomly generated mines throughout the board. Opening safe tiles that does not contain bomb will give clues on which tiles you want to open. Try it for yourself!
 
+## **Screenshots**
+
+![Gameplay Screen](./screenshots/Gameplay.png)
+
+![Win-game Screen](./screenshots/WinScreen.png)
+
+![Lose-game Screen](./screenshots/LoseScreen.png)
+
 ## **Languages Used**
 
 - HTML
