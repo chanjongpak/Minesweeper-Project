@@ -1,4 +1,4 @@
-MINESWEEPER!
+<header>MINESWEEPER!</header>
 
 Launch Game
 https://chanjongpak.github.io/Minesweeper-Project/
