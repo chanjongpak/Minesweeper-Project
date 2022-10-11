@@ -12,10 +12,6 @@ h1 {
   font-family: "Courier New", Courier, monospace;
 }
 
-.bomb {
-  background-color: red;
-}
-
 .grid {
   margin: auto;
   display: flex;
